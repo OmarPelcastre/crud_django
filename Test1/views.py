@@ -13,7 +13,7 @@ import json
 
 class Test1List(APIView):
     def get(self, request, format=None):
-        queryset = testModel.objects.filter(delete=False)
+        queryset = testModel.objects.filter(active=False)
         serializer = Test1Serializer(queryset, many=True)
         datas = serializer.data
         return Response(datas)
@@ -28,7 +28,7 @@ class Test1List(APIView):
 class Test1Detail(APIView):
     def get_object(self, pk):
         try:
-            return testModel.objects.get(pk=pk, delete=False)
+            return testModel.objects.get(pk=pk, active=False)
         except testModel.DoesNotExist:
             return "No"
     
