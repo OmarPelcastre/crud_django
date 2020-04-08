@@ -18,6 +18,12 @@ from django.urls import path, re_path
 from django.conf.urls import include
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
+from rest_framework_swagger.views import get_swagger_view
+from Test1 import views
+from rest_framework.authtoken.views import ObtainAuthToken
+
+
+schema_view = get_swagger_view(title="My api")
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -37,11 +43,12 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^', include(router.urls)),
-    re_path(r'^api/v1/login/', include('login.urls')),
-    re_path(r'^api/v1/', include('Profile.urls')),
+    
     re_path(r'^api/v1/', include('Test1.urls')),
+    # re_path(r'^api/v1/test1/$', views.Test1List.as_view()),
+    # re_path(r'^api/v1/test1/(?P<pk>\d+)$', views.Test1Detail.as_view()),
+    re_path(r'^api/v1/login/', include('login.urls')),
     re_path(r'^api/v1/registration/', include('rest_auth.registration.urls')),
-    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    re_path(r'^rest-auth/', include('rest_auth.urls')),
+    re_path(r'^api/v1/swagger/', schema_view),
 
 ]

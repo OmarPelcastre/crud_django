@@ -31,6 +31,11 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    
+    'Profile',
+    'Test1',
+    'login',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,10 +51,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'rest_auth',
+    'rest_framework_swagger',
 
-    'login',
-    'Profile',
-    'Test1',
+    
 ]
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -66,24 +70,22 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
-CORS_ORIGIN_WHITELIST = (
+# CORS_ORIGIN_WHITELIST = [
+    
+#     'http://localhost:4200'
+# ]
 
-    'google.com',
-    'hostname.example.com',
-    'localhost:8000',
-    '127.0.0.1:9000'
-)
-
-CORS_ALLOW_METHODS = (
+CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
     'OPTIONS',
     'PATCH',
     'POST',
     'PUT',
-)
+]
 
 ROOT_URLCONF = 'Grafica.urls'
 
@@ -113,7 +115,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':('rest_framework.permissions.IsAuthenticated',),
     'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework.authentication.TokenAuthentication',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100
+    'PAGE_SIZE': 100,
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+
 }
 
 WSGI_APPLICATION = 'Grafica.wsgi.application'
@@ -129,16 +133,6 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-#         'NAME' : 'graficadb',
-#         'USER': 'postgres',
-#         'PASSWORD': '14072017',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
 
 
 # Password validation

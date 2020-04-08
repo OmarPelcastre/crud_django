@@ -8,7 +8,7 @@ class testModel(models.Model):
     edad = models.IntegerField(null=True)
     active = models.BooleanField(default = False)
     def __str__(self):
-        return self.testName
+        return self.nombre
 
     class Meta:
         db_table = "testModel"
